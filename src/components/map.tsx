@@ -131,9 +131,19 @@ export default function MapContainer() {
                       <div className="pt-1 flex space-x-1 font-j">
                         {   "Last cleaned on " + new Date(popupInfo.cleaned).toDateString()}
                       </div>
+                      {popupInfo.ecofriendly?
                       <div className="pt-2 flex space-x-1 font-j">
-                        {popupInfo.ecofriendly?"♲ Eco-Friendly":""}
-                      </div>
+                          {popupInfo.ecofriendly?"♲ Eco-Friendly":""}
+                      </div>:<></>
+                      }
+                      {popupInfo.women_products?
+                      <div className="pt-2 flex space-x-1 font-j">
+                          {popupInfo.women_products?"♀ Menstrual Products Available":""}
+                      </div>:<></>
+                      }
+                      {popupInfo.baby_change? <div className="pt-2 flex space-x-1 font-j">
+                          {popupInfo.baby_change?"🚼  Baby Change Stations":""}
+                      </div>:<></>}
                   </div>
                   <div className='m-6'>
                       <Dialogue/>
