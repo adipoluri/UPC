@@ -4,6 +4,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useUser } from '@auth0/nextjs-auth0/client'
 import Dialogue from './dialogue'
+import Logo from './logo'
 
 const navigation = [
   { name: 'Dashboard', href: '#', current: true },
@@ -33,6 +34,8 @@ export default function Navbar() {
             </a>
           </div>:<></>
         }
+        <Logo/>
+        <span className='font-d tracking-tight text-5xl medium-bold pr-6'>Universal Privy Compass</span>
         {user?
         <Menu as="div" className="relative ml-3">
           <div>

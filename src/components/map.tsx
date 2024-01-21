@@ -100,10 +100,10 @@ export default function MapContainer() {
                 latitude={Number(popupInfo.latitude)}
                 closeButton={false}
                 onClose={() => setPopupInfo(null)}
-                className='bg-white rounded-[30px] w-5/6 overflow-hidden shadow-[5px_5px] border-4 border-black'
+                className='bg-white rounded-[30px] overflow-hidden shadow-[5px_5px] border-4 border-black'
                 >
                 <div className='font-p mx-6 text-base'>
-                  {popupInfo.building_name}{' '}|{' Floor '}{popupInfo.floor} 
+                  {popupInfo.building_name + ' | Floor ' +popupInfo.floor} 
                 </div>
                 <div className='m-6'>
                   <Dialogue/>

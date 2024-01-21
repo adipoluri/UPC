@@ -21,7 +21,8 @@ module.exports = {
     },
     fontFamily: {
       j: ['Plus Jakarta Sans', 'sans-serif'],
-      p: ['Public Sans', 'sans-serif']
+      p: ['Public Sans', 'sans-serif'],
+      d: ['Darker Grotesque', 'sans-serif']
     },
   },
   plugins: [],
