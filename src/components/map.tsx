@@ -1,5 +1,5 @@
 'use client'
-import React, {useState, useEffect, useMemo, useRef} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import Map, {GeolocateControl, MapRef, Marker, NavigationControl, Popup, useMap} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { createClient } from '@/src/utils/supabase/client';

@@ -1,9 +1,7 @@
 'use client'
 import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Menu, Transition } from '@headlessui/react'
 import { useUser } from '@auth0/nextjs-auth0/client'
-import Dialogue from './dialogue'
 import Logo from './logo'
 
 const navigation = [
