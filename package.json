@@ -9,6 +9,8 @@
     "@auth0/nextjs-auth0": "^3.5.0",
     "@headlessui/react": "^1.7.18",
     "@heroicons/react": "^2.1.1",
+    "@mappedin/mappedin-js": "^5.26.0",
+    "@mappedin/react-native-sdk": "^5.26.0",
     "@radix-ui/react-scroll-area": "^1.0.5",
     "@supabase/auth-helpers-nextjs": "^0.8.7",
     "@supabase/ssr": "latest",
@@ -20,6 +22,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^5.0.1",
     "react-map-gl": "^7.1.7",
+    "react-native-webview": "^13.6.4",
     "typescript": "5.3.3"
   },
   "devDependencies": {
