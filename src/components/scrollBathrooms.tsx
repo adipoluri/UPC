@@ -9,10 +9,10 @@ const BathroomList = () => (
     <ScrollArea.Root className="w-[400px] h-5/6 rounded-[30px] overflow-hidden shadow-[9px_9px] border-4 border-black bg-white">
         <ScrollArea.Viewport className="w-full h-full rounded">
         <div className="py-[15px] px-5">
-            <div className="text-violet11 text-[15px] leading-[18px] font-medium">Tags</div>
+            <div className="font-j text-[15px] leading-[18px] font-medium">Tags</div>
             {TAGS.map((tag) => (
             <div
-                className="text-mauve12 text-[13px] leading-[18px] mt-2.5 pt-2.5 border-t border-t-mauve6"
+                className="font-j text-[13px] leading-[18px] mt-2.5 pt-2.5 border-t border-t-mauve6"
                 key={tag}
             >
                 {tag}

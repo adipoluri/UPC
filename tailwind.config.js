@@ -20,8 +20,9 @@ module.exports = {
       },
     },
     fontFamily: {
-      sans: ['"PT Sans"', 'sans-serif']
-    }
+      j: ['Plus Jakarta Sans', 'sans-serif'],
+      p: ['Public Sans', 'sans-serif']
+    },
   },
   plugins: [],
 };

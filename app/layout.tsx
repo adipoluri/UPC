@@ -12,7 +12,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.className}>
-      <body className="bg-[#fff2ab]">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com"/>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin=""/>
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Public+Sans:wght@700&display=swap" rel="stylesheet"/>
+      </head>
+      <body className="bg-[#ffc702]">
         <Layout>   
           <UserProvider>    
             {children}
