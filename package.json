@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@auth0/nextjs-auth0": "^3.5.0",
+    "@headlessui/react": "^1.7.18",
+    "@heroicons/react": "^2.1.1",
+    "@supabase/auth-helpers-nextjs": "^0.8.7",
+    "@supabase/ssr": "latest",
+    "@supabase/supabase-js": "^2.39.3",
+    "geist": "^1.2.1",
+    "mapbox-gl": "^3.1.0",
+    "next": "latest",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^5.0.1",
+    "react-map-gl": "^7.1.7",
+    "typescript": "5.3.3"
+  },
+  "devDependencies": {
+    "@types/node": "20.11.5",
+    "@types/react": "18.2.48",
+    "@types/react-dom": "18.2.18",
+    "autoprefixer": "^10.4.17",
+    "encoding": "^0.1.13",
+    "postcss": "^8.4.33",
+    "tailwindcss": "^3.4.1"
+  }
+}
