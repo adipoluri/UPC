@@ -25,7 +25,6 @@ export default function Navbar() {
         {/* Profile dropdown */}
         <Menu as="div" className="relative ml-3">
           <div>
-            <Dialogue/>
             <Menu.Button className="relative flex rounded-[30px] overflow-hidden shadow-[3px_3px] border-4 border-black">
               <span className="absolute -inset-1.5"/>
               <span className="sr-only">Open user menu</span>
