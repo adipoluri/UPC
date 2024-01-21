@@ -16,7 +16,10 @@ const options: TGetVenueOptions = {
 export default function App() {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const venue = useVenue(options);
-  const mapView = useMapView(mapRef.current, venue);
+  let mapView;
+  if (mapRef.current !== null) {
+    // mapView = useMapView(mapRef.current, venue); HELP MEEEEEEEEEE:( 
+  }
 
   return <div id="app" ref={mapRef} />;
 }
