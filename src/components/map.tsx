@@ -89,7 +89,7 @@ export default function MapContainer() {
           style={{width: "100%", height: "100%", borderRadius:"30px", boxShadow:"11px 11px 0px 0px #000", outline:"solid", outlineWidth:"4px"}} //leave me alone ill change this later ok, ema
           mapStyle="mapbox://styles/mapbox/standard"
         >
-            <GeolocateControl fitBoundsOptions={{ maxZoom: 17 }} ref={geoControlRef} trackUserLocation={true} showAccuracyCircle showUserHeading style={{marginRight:"24px",marginTop:"24px", scale:"1.25"}}/>
+            <GeolocateControl fitBoundsOptions={{ maxZoom: 17 }} ref={geoControlRef} trackUserLocation={true} showUserHeading style={{marginRight:"24px",marginTop:"24px", scale:"1.25"}}/>
             <NavigationControl visualizePitch style={{marginRight:"24px",marginTop:"24px",scale:"1.25"}}/>
             <Bathrooms showPopup={setPopupInfo} bathrooms={bathrooms}/>
 

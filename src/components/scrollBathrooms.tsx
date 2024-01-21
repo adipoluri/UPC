@@ -11,16 +11,79 @@ export default function BathroomList(props){
     const [isLoading, setIsLoading] = useState(true);   
     const [bathrooms, setBathrooms] = useState<any>([]);
     const {current: map} = useMap();
-  
+    const [location, setLocation] = useState<any>(null);
+
     useEffect(() => {
       const fetchBathrooms = async () => {
         const { data } = await supabase.from('bathrooms').select();
+
+        if ('geolocation' in navigator) {
+            // Get the current position
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    console.log(latitude, longitude)
+                    console.log(data)
+                    setLocation({ latitude, longitude });
+                    data?.sort((a, b) => {
+                        const distanceA = calculateDistance(
+                            a.latitude,
+                            a.longitude,
+                            latitude,
+                            longitude
+                        );
+                        const distanceB = calculateDistance(
+                            b.latitude,
+                            b.longitude,
+                            latitude,
+                            longitude
+                        );
+                        return distanceA - distanceB;
+                    });
+                }
+            );
+        }
+
         setBathrooms(data);
         setIsLoading(false);
       };
   
       fetchBathrooms();
     }, []);
+
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        const R = 6371; // Radius of the Earth in kilometers
+        const dLat = (lat2 - lat1) * (Math.PI / 180);
+        const dLon = (lon2 - lon1) * (Math.PI / 180);
+        const a =
+          Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+          Math.cos(lat1 * (Math.PI / 180)) *
+            Math.cos(lat2 * (Math.PI / 180)) *
+            Math.sin(dLon / 2) *
+            Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        const distance = R * c;
+        return distance;
+    }
+    
+    function prettifyKilometers(kms, precision = 2) {
+        if (typeof kms !== 'number') {
+            throw new Error('Input must be a number representing kilometers.');
+        }
+        
+        const units = ['km', 'Mm', 'Gm', 'Tm']; // Kilometers, Megameters, Gigameters, Terameters
+        
+        let unitIndex = 0;
+        while (kms >= 1000 && unitIndex < units.length - 1) {
+            kms /= 1000;
+            unitIndex++;
+        }
+        
+        const formattedDistance = kms.toFixed(precision);
+        const unit = units[unitIndex];
+        
+        return `${formattedDistance} ${unit}`;
+    }
 
     return(
         <ScrollArea.Root className="w-[400px] h-5/6 rounded-[30px] overflow-hidden shadow-[9px_9px] border-4 border-black bg-[#fff2ab]">
@@ -43,15 +106,21 @@ export default function BathroomList(props){
                                         bathroom.building_name + " | Floor " + bathroom.floor}
                                     </div>
                                     <div className="grow"/>
+                                    <div className="flex font-j text-base font-medium">
+                                        {location? prettifyKilometers(calculateDistance(bathroom.latitude, bathroom.longitude, location.latitude, location.longitude)):""}
+                                    </div>
+                                </div>
+                                <div className="flex">
+                                    <div className="flex space-x-1 font-j">
+                                        {   "★".repeat(bathroom.rating)+"☆".repeat(5-bathroom.rating)+" ("+bathroom.rating+" ratings)"}
+                                    </div>
+                                    <div className="grow"/>
                                     <div className="flex font-j">
                                         {bathroom.gender == 1?<ManPin />:<></>}
                                         {bathroom.gender == 2?<WomanPin/>:<></>}
                                         {bathroom.gender == 3?<NeutralPin/>:<></>}
                                         {bathroom.accessible?<AccessiblePin/>:<></>}
                                     </div>
-                                </div>
-                                <div className="flex space-x-1 font-j">
-                                    {   "★".repeat(bathroom.rating)+"☆".repeat(5-bathroom.rating)+" ("+bathroom.rating+" ratings)"}
                                 </div>
                                 <div className="flex font-j overflow-auto max-h-[60px] text-left py-2">
                                     {bathroom.description}
