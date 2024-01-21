@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
 import { createClient } from '@/src/utils/supabase/client';
 import { useMap } from 'react-map-gl';
+import { AccessiblePin, ManPin, NeutralPin, WomanPin } from './pin';
 
 export default function BathroomList(props){
     const supabase = createClient();
@@ -25,7 +26,7 @@ export default function BathroomList(props){
         <ScrollArea.Root className="w-[400px] h-5/6 rounded-[30px] overflow-hidden shadow-[9px_9px] border-4 border-black bg-[#fff2ab]">
             <ScrollArea.Viewport className="w-full h-full rounded">
             <div className="px-[-4px]">
-                <div className="font-j text-[20px] leading-[23px] p-2.5 text-center font-medium">Nearby Bathrooms</div>
+                <div className="font-j text-[25px] leading-[28px] p-2.5 text-center font-medium text-xl">Nearby Bathrooms</div>
                 {bathrooms.map((bathroom: any) => (
                         <button
                             className="flex font-p text-[13px] leading-[18px] p-2.5 w-full border-t-[2px] border-black bg-[#fff2ab]"
@@ -36,13 +37,38 @@ export default function BathroomList(props){
                                 props.highlightBathroom(bathroom);
                             }}
                         >   
-                            <div className="flex-col justify-between">
-                                <div className="font-medium">{
-                                    bathroom.building_name + "| Floor " + bathroom.floor}
+                            <div className='flex-col justify-items-start w-full spacing-6'>
+                                <div className="flex">
+                                    <div className="flex-none text-base font-medium text-left">{
+                                        bathroom.building_name + " | Floor " + bathroom.floor}
+                                    </div>
+                                    <div className="grow"/>
+                                    <div className="flex font-j">
+                                        {bathroom.gender == 1?<ManPin />:<></>}
+                                        {bathroom.gender == 2?<WomanPin/>:<></>}
+                                        {bathroom.gender == 3?<NeutralPin/>:<></>}
+                                        {bathroom.accessible?<AccessiblePin/>:<></>}
+                                    </div>
                                 </div>
                                 <div className="flex space-x-1 font-j">
-                                {   "★".repeat(bathroom.rating)+"☆".repeat(5-bathroom.rating)+" ("+bathroom.rating+" ratings)"}
+                                    {   "★".repeat(bathroom.rating)+"☆".repeat(5-bathroom.rating)+" ("+bathroom.rating+" ratings)"}
                                 </div>
+                                <div className="flex font-j overflow-auto max-h-[60px] text-left py-2">
+                                    {bathroom.description}
+                                </div>
+                                <div className="flex">
+                                    <div className="pt-1 flex-none space-x-1 font-j">
+                                        {   "🕔 Closes by "+ bathroom.closing_time.substring(0,5)}
+                                    </div>
+                                    <div className="grow"/>
+                                    <div className="pt-1 flex space-x-1 font-j">
+                                    {   "Last cleaned on " + new Date(bathroom.cleaned).toDateString()}
+                                    </div>
+                                </div>
+                                <div className="pt-2 flex space-x-1 font-j">
+                                    {bathroom.ecofriendly?"♲ Eco-Friendly":""}
+                                </div>
+                                
                             </div>
                         </button>
                 ))}
