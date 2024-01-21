@@ -4,6 +4,7 @@ import BathroomList from "@/src/components/scrollBathrooms";
 import "./globals.css";
 import Navbar from "@/src/components/navbar";
 import Opener from "@/src/components/dom/Opener";
+import AddButton from "@/src/components/addButton";
 
 export default function Page() {
 
@@ -14,6 +15,11 @@ export default function Page() {
       </div>
       <div>
         <MapContainer/>
+      </div>
+      <div className="absolute bottom-0 right-0 z-10 w-screen p-6">
+        <div className='flex  flex-row-reverse'>
+          < AddButton/>
+        </div>
       </div>
     </div>
   );
