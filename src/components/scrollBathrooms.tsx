@@ -86,10 +86,11 @@ export default function BathroomList(props){
     }
 
     return(
-        <ScrollArea.Root className="w-[400px] h-5/6 rounded-[30px] overflow-hidden shadow-[9px_9px] border-4 border-black bg-[#fff2ab]">
+        <>
+        <ScrollArea.Root className="w-[400px] h-5/6 rounded-[30px] overflow-hidden shadow-[8px_8px] border-4 border-black bg-[#fff2ab]">
             <ScrollArea.Viewport className="w-full h-full rounded">
             <div className="px-[-4px]">
-                <div className="font-j text-[25px] leading-[28px] p-2.5 text-center font-medium text-xl">Nearby Bathrooms</div>
+                <div className="font-j text-[25px] leading-[28px] p-2.5 text-center font-medium text-xl">Nearby Washrooms</div>
                 {bathrooms.map((bathroom: any) => (
                         <button
                             className="flex font-p text-[13px] leading-[18px] p-2.5 w-full border-t-[2px] border-black bg-[#fff2ab]"
@@ -127,17 +128,26 @@ export default function BathroomList(props){
                                 </div>
                                 <div className="flex">
                                     <div className="pt-1 flex-none space-x-1 font-j">
-                                        {   "🕔 Closes by "+ bathroom.closing_time.substring(0,5)}
+                                        {   "🕔  Closes by "+ bathroom.closing_time.substring(0,5)}
                                     </div>
                                     <div className="grow"/>
                                     <div className="pt-1 flex space-x-1 font-j">
                                     {   "Last cleaned on " + new Date(bathroom.cleaned).toDateString()}
                                     </div>
                                 </div>
+                                {bathroom.ecofriendly?
                                 <div className="pt-2 flex space-x-1 font-j">
                                     {bathroom.ecofriendly?"♲ Eco-Friendly":""}
-                                </div>
-                                
+                                </div>:<></>
+                                }
+                                {bathroom.women_products?
+                                <div className="pt-2 flex space-x-1 font-j">
+                                    {bathroom.women_products?"♀ Menstrual Products Available":""}
+                                </div>:<></>
+                                }
+                                {bathroom.baby_change? <div className="pt-2 flex space-x-1 font-j">
+                                    {bathroom.baby_change?"🚼  Baby Change Stations":""}
+                                </div>:<></>}
                             </div>
                         </button>
                 ))}
@@ -157,5 +167,20 @@ export default function BathroomList(props){
             </ScrollArea.Scrollbar>
             <ScrollArea.Corner className="bg-blackA5" />
         </ScrollArea.Root>
+        <div className="flex-col pt-3 pl-12 font-j text-xl medium-bold">
+            <div className="flex-row">
+                <span className='flex'><ManPin /> Men's Washroom</span>
+            </div>
+            <div className="flex-row">
+                <span className='flex'><WomanPin/> Women's Washroom</span>
+            </div>
+            <div className="flex-row">
+                <span className='flex'><NeutralPin /> Gender Neutral Washroom</span>
+            </div>
+            <div className="flex-row">
+                <span className='flex'><AccessiblePin /> Accessible Washroom</span>
+            </div>
+        </div>
+        </>
     )
 }

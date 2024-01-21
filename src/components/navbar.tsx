@@ -24,6 +24,7 @@ export default function Navbar() {
     <div className="relative flex-row-reverse h-16 items-center justify-between">
       <div className="absolute inset-y-0 right-0 flex items-center pr-2 static inset-auto mx-6 pr-0 pt-4">
         {/* Profile dropdown */}
+        <Logo/>
         {!user&&!isLoading?                
           <div className="font-j absolute right-0 z-10 w-48 origin-top-right rounded-[30px] bg-white py-1 shadow-[4px_4px] border-4 border-black">
             <a
@@ -34,7 +35,6 @@ export default function Navbar() {
             </a>
           </div>:<></>
         }
-        <Logo/>
         <span className='font-d tracking-tight text-5xl medium-bold pr-6'>Universal Privy Compass</span>
         {user?
         <Menu as="div" className="relative ml-3">

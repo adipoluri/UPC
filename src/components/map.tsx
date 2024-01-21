@@ -92,7 +92,6 @@ export default function MapContainer() {
             <GeolocateControl fitBoundsOptions={{ maxZoom: 17 }} ref={geoControlRef} trackUserLocation={true} showUserHeading style={{marginRight:"24px",marginTop:"24px", scale:"1.25"}}/>
             <NavigationControl visualizePitch style={{marginRight:"24px",marginTop:"24px",scale:"1.25"}}/>
             <Bathrooms showPopup={setPopupInfo} bathrooms={bathrooms}/>
-
             {popupInfo && (
               <Popup
                 anchor="top"
@@ -100,13 +99,45 @@ export default function MapContainer() {
                 latitude={Number(popupInfo.latitude)}
                 closeButton={false}
                 onClose={() => setPopupInfo(null)}
-                className='bg-white rounded-[30px] overflow-hidden shadow-[5px_5px] border-4 border-black'
+                className='rounded-[30px] overflow-hidden shadow-[5px_5px] border-4 border-black bg-[#fff2ab]'
                 >
-                <div className='font-p mx-6 text-base'>
-                  {popupInfo.building_name + ' | Floor ' +popupInfo.floor} 
-                </div>
-                <div className='m-6'>
-                  <Dialogue/>
+                <div
+                  className="flex-col font-p text-[13px] leading-[18px] p-2.5 w-full border-black bg-[#fff2ab]"
+                  >   
+                  <div className='flex-col justify-items-start w-full spacing-6'>
+                      <div className="flex">
+                        <div className="flex-none text-base font-medium text-left">{
+                            popupInfo.building_name + " | Floor " + popupInfo.floor}
+                        </div>
+                      </div>
+                      <div className="flex">
+                        <div className="flex space-x-1 font-j">
+                            {   "★".repeat(popupInfo.rating)+"☆".repeat(5-popupInfo.rating)+" ("+popupInfo.rating+" ratings)"}
+                        </div>
+                        <div className="grow"/>
+                        <div className="flex font-j">
+                            {popupInfo.gender == 1?<ManPin />:<></>}
+                            {popupInfo.gender == 2?<WomanPin/>:<></>}
+                            {popupInfo.gender == 3?<NeutralPin/>:<></>}
+                            {popupInfo.accessible?<AccessiblePin/>:<></>}
+                        </div>
+                      </div>
+                      <div className="flex font-j overflow-auto max-h-[60px] text-left py-2">
+                          {popupInfo.description}
+                      </div>
+                      <div className="pt-1 flex-none space-x-1 font-j">
+                        {   "🕔 Closes by "+ popupInfo.closing_time.substring(0,5)}
+                      </div>
+                      <div className="pt-1 flex space-x-1 font-j">
+                        {   "Last cleaned on " + new Date(popupInfo.cleaned).toDateString()}
+                      </div>
+                      <div className="pt-2 flex space-x-1 font-j">
+                        {popupInfo.ecofriendly?"♲ Eco-Friendly":""}
+                      </div>
+                  </div>
+                  <div className='m-6'>
+                      <Dialogue/>
+                  </div>
                 </div>
               </Popup>
             )}
