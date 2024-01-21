@@ -1,39 +1,68 @@
 'use client'
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import * as ScrollArea from '@radix-ui/react-scroll-area';
+import { createClient } from '@/src/utils/supabase/client';
+import { useMap } from 'react-map-gl';
 
-const TAGS = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
+export default function BathroomList(props){
+    const supabase = createClient();
+    const [isLoading, setIsLoading] = useState(true);   
+    const [bathrooms, setBathrooms] = useState<any>([]);
+    const {current: map} = useMap();
+  
+    useEffect(() => {
+      const fetchBathrooms = async () => {
+        const { data } = await supabase.from('bathrooms').select();
+        setBathrooms(data);
+        setIsLoading(false);
+      };
+  
+      fetchBathrooms();
+    }, []);
 
-const BathroomList = () => (
-    <ScrollArea.Root className="w-[400px] h-5/6 rounded-[30px] overflow-hidden shadow-[9px_9px] border-4 border-black bg-white">
-        <ScrollArea.Viewport className="w-full h-full rounded">
-        <div className="py-[15px] px-5">
-            <div className="font-j text-[15px] leading-[18px] font-medium">Tags</div>
-            {TAGS.map((tag) => (
-            <div
-                className="font-j text-[13px] leading-[18px] mt-2.5 pt-2.5 border-t border-t-mauve6"
-                key={tag}
-            >
-                {tag}
+    return(
+        <ScrollArea.Root className="w-[400px] h-5/6 rounded-[30px] overflow-hidden shadow-[9px_9px] border-4 border-black bg-[#fff2ab]">
+            <ScrollArea.Viewport className="w-full h-full rounded">
+            <div className="px-[-4px]">
+                <div className="font-j text-[20px] leading-[23px] p-2.5 text-center font-medium">Nearby Bathrooms</div>
+                {bathrooms.map((bathroom: any) => (
+                        <div
+                            className="flex font-p text-[13px] leading-[18px] p-2.5 overflow-hidden border-y-[1px] border-black bg-[#fff2ab]"
+                            key={bathroom.bid}
+                        >   
+                            <div className="flex-col justify-between">
+                                <div className="font-medium">{
+                                    bathroom.building_name + "| Floor " + bathroom.floor}
+                                </div>
+                                <div className="flex space-x-1 font-j">
+                                {   "★".repeat(bathroom.rating)+"☆".repeat(5-bathroom.rating)+" ("+bathroom.rating+" ratings)"}
+                                <button onClick={e => {
+                                        // If we let the click event propagates to the map, it will immediately close the popup
+                                        // with `closeOnClick: true`
+                                        props.highlightBathroom(bathroom);
+                                    }}>
+                                    "yo"
+                                </button>
+                                </div>
+                            </div>
+                        </div>
+                ))}
             </div>
-            ))}
-        </div>
-        </ScrollArea.Viewport>
-        <ScrollArea.Scrollbar
-        className="flex select-none touch-none p-0.5 bg-blackA3 transition-colors duration-[160ms] ease-out hover:bg-blackA5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
-        orientation="vertical"
-        >
-        <ScrollArea.Thumb className="flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
-        </ScrollArea.Scrollbar>
-        <ScrollArea.Scrollbar
-        className="flex select-none touch-none p-0.5 bg-blackA3 transition-colors duration-[160ms] ease-out hover:bg-blackA5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
-        orientation="horizontal"
-        >
-        <ScrollArea.Thumb className="flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
-        </ScrollArea.Scrollbar>
-        <ScrollArea.Corner className="bg-blackA5" />
-    </ScrollArea.Root>
-);
-
-export default BathroomList;
+            </ScrollArea.Viewport>
+            <ScrollArea.Scrollbar
+            className="flex select-none touch-none p-0.5 bg-blackA3 transition-colors duration-[160ms] ease-out hover:bg-blackA5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+            orientation="vertical"
+            >
+            <ScrollArea.Thumb className="flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+            </ScrollArea.Scrollbar>
+            <ScrollArea.Scrollbar
+            className="flex select-none touch-none p-0.5 bg-blackA3 transition-colors duration-[160ms] ease-out hover:bg-blackA5 data-[orientation=vertical]:w-2.5 data-[orientation=horizontal]:flex-col data-[orientation=horizontal]:h-2.5"
+            orientation="horizontal"
+            >
+            <ScrollArea.Thumb className="flex-1 bg-mauve10 rounded-[10px] relative before:content-[''] before:absolute before:top-1/2 before:left-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-full before:h-full before:min-w-[44px] before:min-h-[44px]" />
+            </ScrollArea.Scrollbar>
+            <ScrollArea.Corner className="bg-blackA5" />
+        </ScrollArea.Root>
+    )
+}

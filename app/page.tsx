@@ -12,13 +12,8 @@ export default function Page() {
       <div className="absolute top-0 right-0 z-10 w-screen">
         < Navbar/>
       </div>
-      <div className="absolute top-0 left-0 z-10 p-4 h-screen">
-        <BathroomList/>
-      </div>
-      <div className="flex p-4 pl-16 pt-20 h-dvh" >
-        <div className="grow w-5/6">
-          <MapContainer/>
-        </div>
+      <div>
+        <MapContainer/>
       </div>
     </div>
   );
