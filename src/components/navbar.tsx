@@ -21,18 +21,33 @@ export default function Navbar() {
 
   return (
     <div className="relative flex-row-reverse h-16 items-center justify-between">
-      <div className="absolute inset-y-0 right-0 flex items-center pr-2 static inset-auto mx-6 pr-0">
+      <div className="absolute inset-y-0 right-0 flex items-center pr-2 static inset-auto mx-6 pr-0 pt-4">
         {/* Profile dropdown */}
+        {!user&&!isLoading?                
+          <div className="font-j absolute right-0 z-10 w-48 origin-top-right rounded-[30px] bg-white py-1 shadow-[4px_4px] border-4 border-black">
+            <a
+              href="/api/auth/login"
+              className='block px-4 py-2 text-sm text-gray-700 '
+            >
+              Login
+            </a>
+          </div>:<></>
+        }
+        {user?
         <Menu as="div" className="relative ml-3">
           <div>
-            <Menu.Button className="relative flex rounded-[30px] overflow-hidden shadow-[3px_3px] border-4 border-black">
+            <Menu.Button className="relative flex rounded-[30px] overflow-hidden shadow-[4px_4px] border-4 border-black">
               <span className="absolute -inset-1.5"/>
               <span className="sr-only">Open user menu</span>
-              <img
-                className="h-8 w-8 rounded-full"
-                src={user?.picture?user.picture:""}
-                alt={""}
-              />
+              {user?
+                <img
+                  className="h-12 w-12 rounded-full"
+                  src={user?.picture?user.picture:""}
+                  alt={""}
+                />
+              :
+                <></>
+              }
             </Menu.Button>
           </div>
           <Transition
@@ -44,12 +59,12 @@ export default function Navbar() {
             leaveFrom="transform opacity-100 scale-100"
             leaveTo="transform opacity-0 scale-95"
           >
-            <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <Menu.Items className="font-j absolute right-0 z-10 mt-4 w-48 origin-top-right rounded-[30px] bg-white py-1 shadow-[5px_5px] border-4 border-black">
               <Menu.Item>
                 {({ active }) => (
                   <a
-                    href="#"
-                    className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                    href="/api/auth/logout"
+                    className='block px-4 py-2 text-sm text-gray-700 '
                   >
                     Sign out
                   </a>
@@ -58,6 +73,7 @@ export default function Navbar() {
             </Menu.Items>
           </Transition>
         </Menu>
+        :<></>}
       </div>
     </div>
   )

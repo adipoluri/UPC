@@ -1,10 +1,12 @@
 'use client'
-import React, {useState, useEffect, useMemo} from 'react';
+import React, {useState, useEffect, useMemo, useRef} from 'react';
 import Map, {GeolocateControl, Marker, NavigationControl, Popup, useMap} from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { createClient } from '@/src/utils/supabase/client';
 import {ManPin, WomanPin, AccessiblePin, NeutralPin} from './pin';
 import Dialogue from './dialogue';
+import type mapboxgl from 'mapbox-gl';
+
 
 export function Bathrooms(props) {
   const supabase = createClient();
@@ -50,12 +52,13 @@ export function Bathrooms(props) {
   );
 }
 
-export default function App() {
+export default function MapContainer() {
   const [popupInfo, setPopupInfo] = useState<any>(null);
   const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN;
   const supabase = createClient();
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState<any>([]);
+  const geoControlRef = useRef<mapboxgl.GeolocateControl>(null);
 
   useEffect(() => {
     const fetchBathrooms = async () => {
@@ -65,7 +68,8 @@ export default function App() {
     };
 
     fetchBathrooms();
-  }, []);
+    geoControlRef.current?.trigger();
+  }, [geoControlRef.current]);
 
 
   return (
@@ -76,10 +80,10 @@ export default function App() {
         latitude: 49.266543,
         zoom: 14,
       }}
-      style={{width: "100%", height: "100%", borderRadius:"30px", boxShadow:"10px 10px 0px 0px #000", outline:"solid", outlineWidth:"4px"}} //leave me alone ill change this later ok, ema
+      style={{width: "100%", height: "100%", borderRadius:"30px", boxShadow:"11px 11px 0px 0px #000", outline:"solid", outlineWidth:"4px"}} //leave me alone ill change this later ok, ema
       mapStyle="mapbox://styles/mapbox/standard"
     >
-      <GeolocateControl fitBoundsOptions={{ maxZoom: 17 }} />
+      <GeolocateControl fitBoundsOptions={{ maxZoom: 17 }} ref={geoControlRef} trackUserLocation={true} showAccuracyCircle showUserHeading/>
       <NavigationControl />
       <Bathrooms showPopup={setPopupInfo} />
 
@@ -88,11 +92,14 @@ export default function App() {
           anchor="top"
           longitude={Number(popupInfo.longitude)}
           latitude={Number(popupInfo.latitude)}
+          closeButton={false}
           onClose={() => setPopupInfo(null)}
           className='bg-white rounded-[30px] overflow-hidden shadow-[5px_5px] border-4 border-black'
           >
+          <div className='font-p mx-6 text-base'>
+            {popupInfo.building_name}{' '}|{' Floor '}{popupInfo.floor} 
+          </div>
           <div className='m-6'>
-            {popupInfo.building_name}{' '}|{' Floor: '}{popupInfo.floor} 
             <Dialogue/>
           </div>
         </Popup>

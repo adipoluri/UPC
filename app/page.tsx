@@ -3,6 +3,7 @@ import Header from "@/src/components/navbar";
 import BathroomList from "@/src/components/scrollBathrooms";
 import "./globals.css";
 import Navbar from "@/src/components/navbar";
+import Opener from "@/src/components/dom/Opener";
 
 export default function Page() {
 
@@ -14,7 +15,7 @@ export default function Page() {
       <div className="absolute top-0 left-0 z-10 p-4 h-screen">
         <BathroomList/>
       </div>
-      <div className="flex p-4 pl-16 pt-16 h-dvh" >
+      <div className="flex p-4 pl-16 pt-20 h-dvh" >
         <div className="grow w-5/6">
           <MapContainer/>
         </div>
