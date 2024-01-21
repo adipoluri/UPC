@@ -4,6 +4,7 @@ import Map, {GeolocateControl, Marker, NavigationControl, Popup, useMap} from 'r
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { createClient } from '@/src/utils/supabase/client';
 import {ManPin, WomanPin, AccessiblePin, NeutralPin} from './pin';
+import Dialogue from './dialogue';
 
 export function Bathrooms(props) {
   const supabase = createClient();
@@ -92,7 +93,7 @@ export default function App() {
           >
           <div className='m-6'>
             {popupInfo.building_name}{' '}|{' Floor: '}{popupInfo.floor} 
-            <img src="https://via.placeholder.com/300" alt="Random Image"/>
+            <Dialogue/>
           </div>
         </Popup>
       )}

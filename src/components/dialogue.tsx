@@ -3,7 +3,7 @@ import { Fragment, useState } from 'react'
 
 
 export default function MyModal() {
-  let [isOpen, setIsOpen] = useState(true)
+  let [isOpen, setIsOpen] = useState(false)
 
   function closeModal() {
     setIsOpen(false)
@@ -15,7 +15,7 @@ export default function MyModal() {
 
   return (
     <>
-      <div className="fixed inset-0 flex items-center justify-center">
+      <div className="relative inset-0 flex items-center justify-center">
         <button
           type="button"
           onClick={openModal}
