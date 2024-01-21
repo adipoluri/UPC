@@ -27,9 +27,14 @@ export default function BathroomList(props){
             <div className="px-[-4px]">
                 <div className="font-j text-[20px] leading-[23px] p-2.5 text-center font-medium">Nearby Bathrooms</div>
                 {bathrooms.map((bathroom: any) => (
-                        <div
-                            className="flex font-p text-[13px] leading-[18px] p-2.5 overflow-hidden border-y-[1px] border-black bg-[#fff2ab]"
+                        <button
+                            className="flex font-p text-[13px] leading-[18px] p-2.5 w-full border-t-[2px] border-black bg-[#fff2ab]"
                             key={bathroom.bid}
+                            onClick={e => {
+                                // If we let the click event propagates to the map, it will immediately close the popup
+                                // with `closeOnClick: true`
+                                props.highlightBathroom(bathroom);
+                            }}
                         >   
                             <div className="flex-col justify-between">
                                 <div className="font-medium">{
@@ -37,16 +42,9 @@ export default function BathroomList(props){
                                 </div>
                                 <div className="flex space-x-1 font-j">
                                 {   "★".repeat(bathroom.rating)+"☆".repeat(5-bathroom.rating)+" ("+bathroom.rating+" ratings)"}
-                                <button onClick={e => {
-                                        // If we let the click event propagates to the map, it will immediately close the popup
-                                        // with `closeOnClick: true`
-                                        props.highlightBathroom(bathroom);
-                                    }}>
-                                    "yo"
-                                </button>
                                 </div>
                             </div>
-                        </div>
+                        </button>
                 ))}
             </div>
             </ScrollArea.Viewport>
