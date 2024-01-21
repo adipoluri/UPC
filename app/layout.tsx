@@ -14,8 +14,7 @@ export default function RootLayout({
     <html lang="en" className={GeistSans.className}>
       <body className="bg-[#fff2ab]">
         <Layout>   
-          <UserProvider>
-            <Navbar/>      
+          <UserProvider>    
             {children}
           </UserProvider>
         </Layout>

@@ -45,7 +45,7 @@ export default function App() {
         latitude: 49.266543,
         zoom: 14,
       }}
-      style={{width: "100%", height: "100%", borderRadius:"40px", boxShadow:"10px 10px 0px 0px #000", outline:"solid", outlineWidth:"5px"}} //leave me alone ill change this later ok, ema
+      style={{width: "100%", height: "100%", borderRadius:"30px", boxShadow:"10px 10px 0px 0px #000", outline:"solid", outlineWidth:"4px"}} //leave me alone ill change this later ok, ema
       mapStyle="mapbox://styles/mapbox/standard"
     >
       <GeolocateControl fitBoundsOptions={{ maxZoom: 17 }} />
