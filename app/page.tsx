@@ -1,14 +1,16 @@
 import MapContainer from "@/src/components/map";
 import Header from "@/src/components/navbar";
 import BathroomList from "@/src/components/scrollBathrooms";
-import { createClient } from "@/src/utils/supabase/server";
-import { cookies } from "next/headers";
 import "./globals.css";
+import Navbar from "@/src/components/navbar";
 
 export default function Page() {
 
   return (
     <div>
+      <div className="absolute top-0 right-0 z-10 w-screen">
+        < Navbar/>
+      </div>
       <div className="absolute top-0 left-0 z-10 p-4 h-screen">
         <BathroomList/>
       </div>

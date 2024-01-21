@@ -19,6 +19,9 @@ module.exports = {
         },
       },
     },
+    fontFamily: {
+      sans: ['"PT Sans"', 'sans-serif']
+    }
   },
   plugins: [],
 };

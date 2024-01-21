@@ -6,7 +6,7 @@ import * as ScrollArea from '@radix-ui/react-scroll-area';
 const TAGS = Array.from({ length: 50 }).map((_, i, a) => `v1.2.0-beta.${a.length - i}`);
 
 const BathroomList = () => (
-    <ScrollArea.Root className="w-[400px] h-5/6 mb-[36px] rounded-[30px] overflow-hidden shadow-[10px_10px] border-4 border-black bg-white">
+    <ScrollArea.Root className="w-[400px] h-5/6 rounded-[30px] overflow-hidden shadow-[9px_9px] border-4 border-black bg-white">
         <ScrollArea.Viewport className="w-full h-full rounded">
         <div className="py-[15px] px-5">
             <div className="text-violet11 text-[15px] leading-[18px] font-medium">Tags</div>
