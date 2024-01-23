@@ -55,7 +55,7 @@ export default function MyModal() {
                     <iframe className="h-screen w-screen"
                       frameBorder="0" 
                       style={{ border: 0 }} 
-                      src="https://maker.mappedin.com/map/657cc670040fcba69696e69e/directions?map=Ground&location=Gender%20Neutral%20%2F%20Accessible%20Washroom&departure=Ground+49.26234283243643+-123.24523183507016" 
+                      src="https://maker.mappedin.com/map/657cc670040fcba69696e69e/directions?map=Ground&location=🚿%20Showers&departure=Ground+49.262409520738+-123.24466075056152" 
                       allowFullScreen>
                     </iframe>
                   </div>
